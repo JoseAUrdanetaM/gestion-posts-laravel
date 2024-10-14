@@ -18,18 +18,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('posts/{post}', [PostController::class, 'update']); // Modificar
     Route::delete('posts/{post}', [PostController::class, 'destroy']); // Eliminar
 
-    // Logout
-    Route::get('logout', [AuthController::class, 'logout']);
-});
 
-// Rutas protegidas (solo admin)
-Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    // Rutas protegidas (solo admin)
     Route::get('/admin/users', [AdminController::class, 'index']);
     Route::post('/admin/users', [AdminController::class, 'store']);
     Route::get('/admin/users/{user}', [AdminController::class, 'show']);
     Route::put('/admin/users/{user}', [AdminController::class, 'update']);
     Route::delete('/admin/users/{user}', [AdminController::class, 'destroy']);
+
+    // Logout
+    Route::get('logout', [AuthController::class, 'logout']);
 });
+
 
 // Rutas de autenticación
 Route::post('register', [AuthController::class, 'register']);
