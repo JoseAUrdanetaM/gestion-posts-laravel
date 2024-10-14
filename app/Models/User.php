@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,35 +10,35 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles; // Habilita características de autenticación, notificaciones y roles
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que son asignables de manera masiva.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name',     // Nombre del usuario
+        'email',    // Correo electrónico del usuario
+        'password', // Contraseña del usuario
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Los atributos que deben estar ocultos para la serialización.
      *
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password',      // Ocultar la contraseña al serializar
+        'remember_token', // Token de recordar sesión, si se utiliza
     ];
 
     /**
-     * The attributes that should be cast.
+     * Los atributos que deben ser convertidos.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime', // Convierte el campo en un objeto de fecha
     ];
 }

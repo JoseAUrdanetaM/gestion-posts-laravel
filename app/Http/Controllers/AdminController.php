@@ -12,7 +12,7 @@ class AdminController extends Controller
     // Obtener todos los usuarios
     public function index()
     {
-        $users = User::all();
+        $users = User::all(); // Recupera todos los usuarios de la base de datos
         return response()->json([
             'message' => 'Lista de usuarios obtenida exitosamente.',
             'data' => $users
@@ -22,13 +22,14 @@ class AdminController extends Controller
     // Crear un nuevo usuario
     public function store(Request $request)
     {
+        // Validar la entrada del usuario
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|in:user,admin' // Validar el rol
         ]);
 
+        // Crear un nuevo usuario en la base de datos
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -56,25 +57,28 @@ class AdminController extends Controller
     // Actualizar un usuario existente
     public function update(Request $request, User $user)
     {
+        // Validar la entrada del usuario para la actualización
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
-            'role' => 'required|string|in:user,admin' // Validar el rol
         ]);
 
-        // Actualizar los campos
+        // Actualizar los campos del usuario
         $user->name = $request->name;
         $user->email = $request->email;
 
+        // Encriptar y actualizar la contraseña si se proporciona
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
 
+        //Guardar los cambios en la base de datos
         $user->save();
 
-        // Asignar el nuevo rol
+        // Asignar el nuevo rol al usuario
         $user->syncRoles([$request->role]);
+
 
         return response()->json([
             'message' => 'Usuario actualizado exitosamente.',
@@ -92,6 +96,7 @@ class AdminController extends Controller
             ], 403);
         }
 
+        // Elimina el usuario de la base de datos
         $user->delete();
         return response()->json([
             'message' => 'Usuario eliminado exitosamente.'

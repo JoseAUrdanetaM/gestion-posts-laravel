@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto de Gestión de Posts Backend - Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es un sistema de gestión de posts desarrollado con Laravel 10 en el backend y Vue.js en el frontend, utilizando autenticación basada en tokens con Sanctum.
 
-## About Laravel
+## Requisitos Previos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Antes de comenzar, asegúrate de tener instalados:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP (>= 8.1)
+- Composer
+- MySQL o MariaDB
+- Node.js y npm (para el frontend)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalación
 
-## Learning Laravel
+1. **Clona el repositorio:**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   ```bash
+   git clone https://github.com/tu_usuario/tu_repositorio.git
+   cd tu_repositorio 
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    Instala las dependencias del backend:
+ 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+2. **Instala las dependencias del backend:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+ ```bash
+composer install
+```
 
-### Premium Partners
+3. **Configura el archivo .env:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+ ```bash
+Copia el archivo .env.example a .env y configura la conexión a la base de datos:
 
-## Contributing
+bash
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+cp .env.example .env
 
-## Code of Conduct
+Luego, edita las variables según tu entorno.
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Genera la clave de la aplicación:**
+ ```bash
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+5. **Ejecuta las migraciones:**
+ ```bash
+php artisan migrate --seed
+```
+6. **Esto creará las tablas necesarias y poblará la base de datos con datos de prueba.**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Inicia el servidor de desarrollo:
+ ```bash
+php artisan serve
+```
 
-## License
+7. **Instala las dependencias del frontend:**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ve al directorio del frontend (si es un repositorio separado):
+
+```bash
+cd frontend
+npm install
+```
+8. **Inicia el servidor del frontend:**
+
+```bash
+
+    npm run serve
+```
+
+API
+
+Rutas Públicas
+
+    GET /api/posts: Obtener todos los posts.
+    GET /api/posts/{post}: Obtener un post específico.
+    GET /api/users/{id}/posts: Obtener posts de un usuario específico.
+
+Rutas Protegidas (requiere autenticación)
+
+    POST /api/posts: Crear un nuevo post.
+    PUT /api/posts/{post}: Modificar un post existente.
+    DELETE /api/posts/{post}: Eliminar un post.
+
+Rutas de Autenticación
+
+    POST /api/register: Registrar un nuevo usuario.
+    POST /api/login: Iniciar sesión.
+    GET /api/logout: Cerrar sesión.
+
+Rutas de Administración (requiere rol de admin)
+
+    GET /api/admin/users: Obtener todos los usuarios.
+    POST /api/admin/users: Crear un nuevo usuario.
+    GET /api/admin/users/{user}: Obtener un usuario específico.
+    PUT /api/admin/users/{user}: Modificar un usuario existente.
+    DELETE /api/admin/users/{user}: Eliminar un usuario.
+
+Migraciones
+
+Las migraciones para las tablas users y posts, junto con la gestión de permisos, se encuentran en la carpeta database/migrations. Asegúrate de ejecutar las migraciones después de configurar tu base de datos.
+Factories
+
+Las factories para los modelos User y Post se encuentran en database/factories. Se utilizan para generar datos de prueba durante el desarrollo.

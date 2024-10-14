@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 // Rutas públicas (cualquiera puede ver los posts)
 Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/{post}', [PostController::class, 'show']);
+Route::get('/users/{id}/posts', [PostController::class, 'getPostsByUser']);
+
 
 // Rutas protegidas (solo usuarios autenticados)
 Route::middleware(['auth:sanctum'])->group(function () {
