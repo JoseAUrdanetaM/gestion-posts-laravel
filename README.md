@@ -1,4 +1,4 @@
-# Proyecto de Gestión de Posts Backend - Laravel
+# Proyecto de Gestión de Posts Backend
 
 Este proyecto es un sistema de gestión de posts desarrollado con Laravel 10 en el backend y Vue.js en el frontend, utilizando autenticación basada en tokens con Sanctum.
 
@@ -35,8 +35,6 @@ composer install
  ```bash
 Copia el archivo .env.example a .env y configura la conexión a la base de datos:
 
-bash
-
 cp .env.example .env
 
 Luego, edita las variables según tu entorno.
@@ -69,8 +67,7 @@ npm install
 8. **Inicia el servidor del frontend:**
 
 ```bash
-
-    npm run serve
+npm run serve
 ```
 
 API
